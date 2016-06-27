@@ -5,18 +5,44 @@ In order to actually run this example you'll need an STM32L1 Discovery Board. I 
 
 ## To run the example:
 
+### Grab a Rust nightly
+
+- Install multirust from [here](https://github.com/brson/multirust) if you haven't already
+- Run `multirust update nightly`
+
 ### Make a directory to work in
 
-    mkdir embedded_rust_experiement
-    cd embedded_rust_experiement
+    mkdir embedded_rust_experiment
+    cd embedded_rust_experiment
+    multirust override nightly
 
-### clone example
+### Clone my embedded Rust example
 
     git clone https://github.com/jvranish/rust-embedded-example.git
 
-### Clone rust src into sibling directory
+### Clone Rust src into sibling directory
+
+We nee to clone the Rust repo:
 
     git clone git@github.com:rust-lang/rust.git
+
+And then we need to checkout the commit that matches the version of our compiler. To find the commit for our current compiler you can do:
+
+    $ rustc -vV
+    rustc 1.11.0-nightly (ad7fe6521 2016-06-23)
+    binary: rustc
+    commit-hash: ad7fe6521b8a59d84102113ad660edb21de2cba6
+    commit-date: 2016-06-23
+    host: x86_64-apple-darwin
+    release: 1.11.0-nightly
+
+And then checkout that specific commit:
+
+    cd rust
+    git checkout 8903c21d618fd25dca61d9bb668c5299d21feac9
+    cd ..
+
+Your commit-hash will almost certainly be different than what I have here. Don’t just copy what I have :)
 
 ### Get ARM gcc
  
@@ -28,23 +54,24 @@ Get the Cube HAL from [here](http://www.st.com/content/st_com/en/products/embedd
 
 ### Install openocd
 
-My favorite debugger toolchain:
+Install my favorite debugger toolchain. On macOS, if you have homebrew installed you can just do:
 
     brew install openocd
 
 ### Run example
 
+Open up `Makefile` in `embedded_rust_experiment ` and make sure the variables: `GCC_ARM_PATH`, `STM32_CUBE_PATH` and `RUST_SRC_PATH` are set to sensible values.
+
 Then to run the example:
 
-- in one console run openocd
+- In one console run openocd
 
-    cd embedded_rust_experiement
+    cd rust-embedded-example
     make openocd
 
-- in another console build and debug
+- In another console build and debug
 
-    cd embedded_rust_experiement
+    cd rust-embedded-example
     make debug
 
-when the gdb prompt shows up you should be able to press `c` and enter and you should see blinking lights on your discovery board.
-
+When the gdb prompt shows up you should be able to press `c` and enter and you should see blinking lights on your discovery board.
