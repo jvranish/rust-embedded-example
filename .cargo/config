@@ -1,0 +1,8 @@
+
+[build]
+target = "thumbv7m-none-eabi"
+target-dir = "build"
+rustflags = ["--sysroot", "build/sysroot"]
+
+[profile.dev]
+panic = "abort"

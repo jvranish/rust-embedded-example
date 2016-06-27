@@ -1,0 +1,12 @@
+[package]
+name = "rust_src"
+version = "0.1.0"
+authors = ["Job Vranish <job.vranish@gmail.com>"]
+
+[lib]
+crate-type = ["staticlib"]
+
+
+[dependencies]
+stm32l1hal = { path = "../stm32l1hal_bindings" }
+

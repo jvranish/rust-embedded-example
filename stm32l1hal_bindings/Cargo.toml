@@ -1,0 +1,4 @@
+[package]
+name = "stm32l1hal"
+version = "0.1.0"
+authors = ["Job Vranish <job.vranish@gmail.com>"]

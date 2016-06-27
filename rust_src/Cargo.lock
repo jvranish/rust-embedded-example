@@ -1,0 +1,11 @@
+[root]
+name = "rust_src"
+version = "0.1.0"
+dependencies = [
+ "stm32l1hal 0.1.0",
+]
+
+[[package]]
+name = "stm32l1hal"
+version = "0.1.0"
+
