@@ -3,6 +3,18 @@ An example of using Rust in an embedded project
 
 In order to actually run this example you'll need an STM32L1 Discovery Board. I don't expect many readers to have this exact board, but it should to relatively easy to port to other targets/board and I thought a complete example would be useful as a point of comparison.
 
+This is basically just STM's GPIO_IOToggle example but with the core inner loop replaced with some Rust code.
+
+Essentially what I did:
+
+- Started with STM's GPIO_IOToggle example.
+- Added a Makefile to build the example.
+- Setup the Cargo configuration necessary to target a Cortex-M3 in `.cargo/config`
+- Added rules to the Makefile to build a Rust `sysroot` with `libcore`
+- Used bindgen to wrap the STM32 HAL libraries for use in Rust
+- Replaced the core inner loop in `main.c` of the GPIO_IOToggle example with Rust code.
+- Added rules to the Makefile to build the Rust code and link the resulting static library into the final binary.
+
 ## To run the example:
 
 ### Grab a Rust nightly
